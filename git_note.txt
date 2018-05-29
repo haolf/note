@@ -1,0 +1,94 @@
+# 设置你的 Git 用户名
+git config --global user.name "<Your-Full-Name>"
+
+# 设置你的 Git 邮箱
+git config --global user.email "<your-email-address>"
+
+# 确保 Git 输出内容带有颜色标记
+git config --global color.ui auto
+
+# 对比显示原始状态
+git config --global merge.conflictstyle diff3
+
+git config --list
+
+#Atom Editor设置
+git config --global core.editor "atom --wait"
+
+#创建新的空仓库
+git init
+
+#克隆 blog 仓库, url 为仓库路径
+git clone url
+
+#查看git仓库的工作状态
+git status
+
+#默认显示仓库中每个commit的：SHA,作者,日期,消息
+git log
+--oneline #每行显示一个commit,且仅显示SHA前7个字符,和commit信息
+--stat    #显示被修改的文件,显示添加/删除的行数,显示一个摘要，其中包含修改/删除的总文件数和总行数
+-p(--path)#显示被修改的文件,显示添加/删除的行所在的位置,显示做出的实际更改
+--author  #按作者选项筛选 commit
+--grep    #按内容选项筛选 commit (git log --grep=bug)(包含空格时需使用引号)
+
+#查看选定的commit
+git show
+--stat #显示更改了多少文件，以及添加/删除的行数
+-p 或 --patch #显示默认补丁信息，但是如果使用了 --stat，将不显示补丁信息，因此传入 -p 以再次添加该信息
+-w #忽略空缩进格变化
+
+git add #命令用于将文件从工作目录移到暂存区,
+#此命令可接受多个文件名（用空格分隔）可以使用句点 . 来表示所有文件
+
+git commit#命令会取出暂存区的文件并保存到仓库中。(-m "xx"简短的commit提交)
+git commit -m "xx"
+git commit --amed #借助 --amend 选项，你可以更改最近的 commit
+
+git diff
+
+.gitignore 文件用来告诉 git 不应跟踪的文件。该文件应该放在 .git 目录所在的目录。
+
+git tag
+git tag -a beta <SHA>
+
+git branch          查看所有分支
+git branch <>       创建分支
+git branch -d <>    删除分支
+git branch -D <>    强制删除分支
+git checkout <>     切换分支
+git checkout -b <>  创建并切换分支
+
+git log --oneline --decorate --graph --all 运行此命令将显示仓库中的所有分支和 commit
+--graph 选项将条目和行添加到输出的最左侧。显示了实际的分支。--all 选项会显示仓库中的所有分支。
+
+git revert <SHA>       #命令用于还原之前创建的 commit
+#此命令：将撤消目标 commit 所做出的更改并创建一个新的 commit 来记录这一更改
+
+git reset --mixed <HEAD^>#命令用来重置（清除）commit(项目一课程八4)
+--mixed #将最新的commit重置并移至工作区 (已更改但并未add暂存)
+--soft  #将最新的commit重置并移至暂存区 (已add但并未commit提交)
+--hard  #将最新的commit重置并移至回收站 (清除commit与更改)
+
+git merge 合并分支
+
+git reflog #查看所有分支的所有操作记录,包括已经被删除的commit记录
+
+git remote #可以连接到多个不同的远程仓库
+git remote add #用于添加到新的远程仓库的连接。
+git remote rename <origin/upstream> <mine> #将origin重命名为mine
+git remote -v  #用于查看远程仓库与连接之间的详细信息。
+git push #命令用于从本地仓库向远程仓库推送 commit. 命令需要：
+#你想向其推送 commit 的远程仓库的简写名
+#包含你想推送的 commit 的分支
+git pull #命令用于将远程仓库的commit同步到本地.
+#远程分支上的 commit 会被复制到本地仓库
+#本地跟踪分支（origin/master）移到指向最新的 commit
+#本地跟踪分支（origin/master）合并到本地分支（master）
+git fetch#命令与pull的区别为不会自动合并
+#远程分支上的 commit 会复制到本地仓库
+#本地跟踪分支（例如，origin/master）移到指向最新的 commit
+
+git shortlog #按作者对所有commit分组
+#用 -s 仅显示 commit 的数量
+#用 -n 来按数量排序（而不是按作者姓名的字母顺序）
